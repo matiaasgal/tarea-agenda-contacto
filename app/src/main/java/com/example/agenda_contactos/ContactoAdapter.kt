@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.collections.addAll
+import kotlin.text.clear
 
-class ContactoAdapter(private val lista: List<Contacto>) :
+class ContactoAdapter(private var lista: MutableList<Contacto>) :
     RecyclerView.Adapter<ContactoAdapter.ContactoViewHolder>() {
 
     class ContactoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val imgContacto: ImageView = itemView.findViewById(R.id.imgContacto)
         val txtNombre: TextView = itemView.findViewById(R.id.txtNombreContacto)
         val txtTelefono: TextView = itemView.findViewById(R.id.txtNumeroContacto)
     }
@@ -29,4 +30,10 @@ class ContactoAdapter(private val lista: List<Contacto>) :
     }
 
     override fun getItemCount(): Int =lista.size
+
+    fun actualizarLista(nuevaLista: MutableList<Contacto>) {
+        lista.clear()
+        lista.addAll(nuevaLista)
+        notifyDataSetChanged()
+    }
 }
